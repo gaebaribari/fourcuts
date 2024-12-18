@@ -5,7 +5,7 @@ import html2canvas from 'html2canvas';
 import saveAs from "file-saver";
 import styled from 'styled-components';
 import { db } from './firebase';
-import { collection, addDoc, updateDoc, doc, increment } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 
 
 const ColorButton = styled.button<{
@@ -44,7 +44,7 @@ function App() {
   const FourCutsRef = useRef<HTMLDivElement>(null);
 
   const [selectedColor, setSelectedColor] = useState<string>(colors[0]);
-  const [selectedSticker, setSelectedSticker] = useState<string>(colors[0]);
+  const [selectedSticker, setSelectedSticker] = useState<string>('');
 
   const handleColorSelect = (color: string) => {
     setSelectedColor(color);
@@ -88,7 +88,7 @@ function App() {
 
   return (
     <div>
-      <FourCuts ref={FourCutsRef} backgroundColor={selectedColor} />
+      <FourCuts ref={FourCutsRef} backgroundColor={selectedColor} sticker={selectedSticker}/>
       <div style={{ display: 'flex', marginTop: '16px' }}>
         {colors.map((color) => (
           <ColorButton
@@ -98,6 +98,11 @@ function App() {
             isSelected={color === selectedColor}
           />
         ))}
+      </div>
+      <div style={{ display: 'flex', marginTop: '16px' }}>
+          <button onClick={()=> setSelectedSticker('bg1')}>1</button>
+          <button onClick={()=> setSelectedSticker('bg2')}>2</button>
+          <button onClick={()=> setSelectedSticker('bg3')}>3</button>
       </div>
       <button onClick={handleCapture}>캡쳐하기</button>
     </div>

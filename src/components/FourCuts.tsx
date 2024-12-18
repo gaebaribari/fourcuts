@@ -2,17 +2,48 @@ import React, { useState, useRef, useEffect, useCallback, forwardRef } from 'rea
 import styled from 'styled-components';
 import heic2any from 'heic2any';
 import imageCompression from 'browser-image-compression';
+import bg1 from '../images/bg1.png';
+import bg2 from '../images/bg2.png';
+import bg3 from '../images/bg3.png';
+
+
+
 
 const PhotoGridContainer = styled.div<{ backgroundColor?: string | ((props: any) => string); }>`
   display: grid;
+  position:relative;  
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 10px;
-  width:500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
   padding: 100px;
   background-color: ${props => props.backgroundColor};
 `;
+
+
+const StickerBackground = styled.div<{ sticker?: string }>` 
+  background-image: url(${props => {
+    switch (props.sticker) {
+      case 'bg1':
+        return bg1;
+      case 'bg2':
+        return bg2;
+      case 'bg3':
+        return bg3;
+      default:
+        return '';
+    }
+  }});
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 600px;
+  height: 600px;
+`;
+
 
 const PhotoBox = styled.div<{ image?: string }>`
   background-color: ${props => props.image ? 'transparent' : '#f0f0f0'};
@@ -63,21 +94,11 @@ const StyledImage = styled.img<{
     const imageAspectRatio = width / height;
 
     if (width < height) {
-      if (imageAspectRatio >= 0.75) {
-        return `
-        width: 100%;
-        height: 100%;
-        max-width: 100%;
-      `;
-
-      } else {
-        return `
+      return `
         width: 100%;
         height: auto;
         max-width: 100%;
       `;
-      }
-
     } else {
       return `
         width: auto;
@@ -114,10 +135,11 @@ interface ImageData {
 
 interface PhotoGridContainerProps {
   backgroundColor?: string | ((props: any) => string);
+  sticker?: string | ((props: any) => string);
 }
 
 
-const FourCuts = forwardRef<HTMLDivElement, PhotoGridContainerProps>(({ backgroundColor, ...props }, ref) => {
+const FourCuts = forwardRef<HTMLDivElement, PhotoGridContainerProps>(({ backgroundColor, sticker, ...props }, ref) => {
   const [images, setImages] = useState<(ImageData & { width?: number, height?: number })[]>(
     new Array(4).fill({
       src: '',
@@ -136,64 +158,48 @@ const FourCuts = forwardRef<HTMLDivElement, PhotoGridContainerProps>(({ backgrou
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file && currentImageIndex !== null) {
-        const fileName = file.name.toLowerCase();
-        const fileExtension = fileName.split('.').pop();
+      const fileName = file.name.toLowerCase();
+      const fileExtension = fileName.split('.').pop();
 
-        try {
-            let processedFile = file;
+      try {
+        let processedFile = file;
 
-            // HEIC 파일인 경우 변환
-            if (fileExtension === 'heic' || fileExtension === 'heif') {
-                processedFile = await imageCompression(file, {
-                    maxSizeMB: 1,
-                    maxWidthOrHeight: 1920,
-                    useWebWorker: true,
-                    fileType: 'image/jpeg'
-                });
-            }
-
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const img = new Image();
-                img.onload = () => {
-                    setImages(prev => {
-                        const newImages = [...prev];
-                        newImages[currentImageIndex] = {
-                            src: reader.result as string,
-                            position: { x: 0, y: 0 },
-                            width: img.width,
-                            height: img.height
-                        };
-                        return newImages;
-                    });
-                };
-                img.src = reader.result as string;
-            };
-            reader.readAsDataURL(processedFile);
-
-        } catch (error) {
-            console.error('이미지 변환 오류:', error);
-            alert('이미지 파일을 처리하는 중 오류가 발생했습니다.');
+        // HEIC 파일인 경우 변환
+        if (fileExtension === 'heic' || fileExtension === 'heif') {
+          processedFile = await imageCompression(file, {
+            maxSizeMB: 1,
+            maxWidthOrHeight: 1920,
+            useWebWorker: true,
+            fileType: 'image/jpeg'
+          });
         }
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const img = new Image();
+          img.onload = () => {
+            setImages(prev => {
+              const newImages = [...prev];
+              newImages[currentImageIndex] = {
+                src: reader.result as string,
+                position: { x: 0, y: 0 },
+                width: img.width,
+                height: img.height
+              };
+              return newImages;
+            });
+          };
+          img.src = reader.result as string;
+        };
+        reader.readAsDataURL(processedFile);
+
+      } catch (error) {
+        console.error('이미지 변환 오류:', error);
+        alert('이미지 파일을 처리하는 중 오류가 발생했습니다.');
+      }
     }
-};
-
-  const convertHeicToJpeg = (file: File): Promise<Blob> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = (e: ProgressEvent<FileReader>) => {
-        const arrayBuffer = e.target?.result;
-        if (arrayBuffer instanceof ArrayBuffer) {
-          const blob = new Blob([arrayBuffer], { type: 'image/jpeg' });
-          resolve(blob);
-        } else {
-          reject(new Error('Failed to read file'));
-        }
-      };
-      reader.onerror = (error) => reject(error);
-      reader.readAsArrayBuffer(file);
-    });
   };
+
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     setIsDragging(true);
@@ -241,8 +247,6 @@ const FourCuts = forwardRef<HTMLDivElement, PhotoGridContainerProps>(({ backgrou
           newY = currentImage.position.y || 0;
         }
       }
-
-
     }
 
     setImages(prev => {
@@ -278,6 +282,7 @@ const FourCuts = forwardRef<HTMLDivElement, PhotoGridContainerProps>(({ backgrou
       ref={ref}
       backgroundColor={backgroundColor}
       {...props}>
+      <StickerBackground sticker={sticker as string} />
       {images.map((image, index) => (
         <PhotoBox
           key={index}

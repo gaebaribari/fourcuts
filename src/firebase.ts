@@ -7,13 +7,13 @@ import { getFirestore, collection, doc, addDoc, updateDoc, increment } from 'fir
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCJl8iDZNZ7BLczGnYdrXIcBAMniyrn6-g",
-  authDomain: "fourcuts-a6bcc.firebaseapp.com",
-  projectId: "fourcuts-a6bcc",
-  storageBucket: "fourcuts-a6bcc.firebasestorage.app",
-  messagingSenderId: "190444008150",
-  appId: "1:190444008150:web:24df1eafc6920a47568f77",
-  measurementId: "G-8B1N1VLZBB"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId:process.env.REACT_APP_MEASUREMENT_ID
 };
 
 
