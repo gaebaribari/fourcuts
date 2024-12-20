@@ -1,11 +1,9 @@
 import React, { useState, useRef, useEffect, useCallback, forwardRef } from 'react';
 import styled from 'styled-components';
-import heic2any from 'heic2any';
 import imageCompression from 'browser-image-compression';
 import bg1 from '../images/bg1.png';
 import bg2 from '../images/bg2.png';
 import bg3 from '../images/bg3.png';
-
 
 
 
@@ -15,9 +13,10 @@ const PhotoGridContainer = styled.div<{ backgroundColor?: string | ((props: any)
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 10px;
-  width: 400px;
-  height: 400px;
-  padding: 100px;
+  width: 350px;
+  height: 350px;
+  margin-top:10px;
+  padding: 80px;
   background-color: ${props => props.backgroundColor};
 `;
 
@@ -39,9 +38,16 @@ const StickerBackground = styled.div<{ sticker?: string }>`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1;
-  width: 600px;
-  height: 600px;
+  z-index: ${props => {
+    switch (props.sticker) {
+      case '':
+        return 0;
+      default:
+        return 1;
+    }
+  }};
+  width: 510px;
+  height: 510px;
 `;
 
 
@@ -91,8 +97,6 @@ const StyledImage = styled.img<{
     const width = props.imageWidth || 0;
     const height = props.imageHeight || 0;
 
-    const imageAspectRatio = width / height;
-
     if (width < height) {
       return `
         width: 100%;
@@ -121,6 +125,7 @@ const Placeholder = styled.div`
   font-size: 24px;
   color: #888;
 `;
+
 
 interface ImageData {
   src: string;
