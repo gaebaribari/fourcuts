@@ -6,7 +6,6 @@ import bg2 from '../images/bg2.png';
 import bg3 from '../images/bg3.png';
 
 
-
 const PhotoGridContainer = styled.div<{ backgroundColor?: string | ((props: any) => string); }>`
   display: grid;
   position:relative;  
@@ -19,7 +18,6 @@ const PhotoGridContainer = styled.div<{ backgroundColor?: string | ((props: any)
   padding: 80px;
   background-color: ${props => props.backgroundColor};
 `;
-
 
 const StickerBackground = styled.div<{ sticker?: string }>` 
   background-image: url(${props => {
@@ -50,7 +48,6 @@ const StickerBackground = styled.div<{ sticker?: string }>`
   height: 510px;
 `;
 
-
 const PhotoBox = styled.div<{ image?: string }>`
   background-color: ${props => props.image ? 'transparent' : '#f0f0f0'};
   background-size: cover;
@@ -78,6 +75,16 @@ const ImageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   
+`;
+
+const CloseButton = styled.button`
+  z-index:1;
+  position:absolute;
+  border: none;
+  background: none;
+  cursor: pointer;
+  top: 4%;
+  right: 2%;
 `;
 
 const StyledImage = styled.img<{
@@ -195,6 +202,8 @@ const FourCuts = forwardRef<HTMLDivElement, PhotoGridContainerProps>(({ backgrou
             });
           };
           img.src = reader.result as string;
+          console.log(images);
+
         };
         reader.readAsDataURL(processedFile);
 
@@ -217,6 +226,19 @@ const FourCuts = forwardRef<HTMLDivElement, PhotoGridContainerProps>(({ backgrou
       y: e.clientY - (image.position.y || 0)
     });
   }, [images]);
+
+  const handleDelete = (index:number) => {
+    setImages(prev => {
+      const newImages = [...prev];
+      newImages[index] = {
+        src: '',
+        position: { x: 0, y: 0 },
+        width: 0,
+        height: 0,
+      };
+      return newImages;
+    });
+  }
 
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
@@ -292,6 +314,7 @@ const FourCuts = forwardRef<HTMLDivElement, PhotoGridContainerProps>(({ backgrou
         <PhotoBox
           key={index}
         >
+
           {!image.src ? (
             <>
               <Placeholder>+</Placeholder>
@@ -303,7 +326,11 @@ const FourCuts = forwardRef<HTMLDivElement, PhotoGridContainerProps>(({ backgrou
               />
             </>
           ) : (
+
             <ImageWrapper ref={imageBoxRef}>
+              <CloseButton onClick={()=>handleDelete(index)}>
+                X
+              </CloseButton>
               <StyledImage
                 src={image.src}
                 ref={(el) => {

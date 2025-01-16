@@ -1,5 +1,5 @@
 import './App.css';
-import { useRef, useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import FourCuts from './components/FourCuts';
 import html2canvas from 'html2canvas';
 import saveAs from "file-saver";
@@ -8,6 +8,8 @@ import { db } from './firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import FeedbackButton from './components/FeedbackButton';
 import backgroundImage from './images/homepage2.jpg';
+const { detect } = require('detect-browser');
+const browser = detect();
 
 
 
@@ -109,7 +111,19 @@ const stickers = [
 ]
 
 
+
 function App() {
+  // const [ownbrowser, setBrowser] = useState<string>('');
+
+  // useEffect(() => {
+
+  //   if (browser) {
+  //     setBrowser(browser.name);
+  //   }
+    
+  // }, [ownbrowser]);
+
+
   const FourCutsRef = useRef<HTMLDivElement>(null);
 
   const [selectedColor, setSelectedColor] = useState<string>(colors[0]);
@@ -121,31 +135,31 @@ function App() {
 
   const handleCapture = async () => {
     if (!FourCutsRef.current) return;
-
-    // 플랫폼 감지 함수
-    // const detectPlatform = () => {
-      // const userAgent = navigator.userAgent.toLowerCase();
-      // const isMobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
-      // return isMobile ? 'mobile' : 'web';
-    // };
-
     try {
       const div = FourCutsRef.current;
       const canvas = await html2canvas(div, { scale: 2 });
       canvas.toBlob(async (blob) => {
         if (blob !== null) {
           saveAs(blob, "result.png");
-          try {
-            const printRef = collection(db, 'photo_prints');
-            await addDoc(printRef, {
-              themeColor: selectedColor,
-              themeSticker: selectedSticker,
-              // platform: detectPlatform(),
-            });
 
-          } catch (firebaseError) {
-            console.error("Firebase logging error:", firebaseError);
-          }
+          const link = document.createElement("a");
+          link.setAttribute("target", "_blank");
+          link.href = URL.createObjectURL(blob);
+          link.download = 'dd';
+    
+          // 다운로드 링크 클릭 및 객체 제거
+          link.click();
+          URL.revokeObjectURL(link.href);
+          // try {
+          //   const printRef = collection(db, 'photo_prints');
+          //   await addDoc(printRef, {
+          //     themeColor: selectedColor,
+          //     themeSticker: selectedSticker,
+          //     // platform: detectPlatform(),
+          //   });
+          // } catch (firebaseError) {
+          //   console.error("Firebase logging error:", firebaseError);
+          // }
         }
       });
     } catch (error) {
@@ -156,6 +170,7 @@ function App() {
 
   return (
     <PageContainer>
+    {/* <p>브라우저이름 {ownbrowser}</p> */}
       <Wrapper>
       <div style={{ display: 'flex', marginTop: '16px' }}>
           {colors.map((color) => (
