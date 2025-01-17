@@ -179,8 +179,6 @@ function App() {
         </div>
       </Wrapper>
     </PageContainer>
-
-
   );
 }
 
