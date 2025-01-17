@@ -176,7 +176,7 @@ const FourCuts = forwardRef<HTMLDivElement, PhotoGridContainerProps>(({ backgrou
       try {
         let processedFile = file;
 
-        // HEIC 파일인 경우 변환
+        // HEIC 파일인 경우 변환 - 이게 있어야 모바일에서 되는건가 이거없어도 되는거면 지우기 
         if (fileExtension === 'heic' || fileExtension === 'heif') {
           processedFile = await imageCompression(file, {
             maxSizeMB: 1,
