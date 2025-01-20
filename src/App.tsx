@@ -22,7 +22,7 @@ function App() {
 
   return (
     <Style.PageContainer>
-      <p>브라우저이름 {browserName}</p>
+      <p>브라우저이름은 말이에요 {browserName}</p>
       <Style.Wrapper>
         <div style={{ display: 'flex', marginTop: '16px' }}>
           {Style.colors.map((color:string) => (

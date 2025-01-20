@@ -1,6 +1,6 @@
 
 import React, { useRef, useEffect, useCallback, forwardRef } from 'react';
-import { useImageHandling } from '../hooks/useImageHandling';
+import { useImageHandling } from '../hooks/useImageHandling';
 import * as Style from '../styles/styledComponents';
 
 interface PhotoGridContainerProps {

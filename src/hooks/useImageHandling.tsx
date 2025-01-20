@@ -32,16 +32,6 @@ export const useImageHandling = () => {
       const fileExtension = fileName.split('.').pop();
 
       try {
-        let processedFile = file;
-        if (fileExtension === 'heic' || fileExtension === 'heif') {
-          processedFile = await imageCompression(file, {
-            maxSizeMB: 1,
-            maxWidthOrHeight: 1920,
-            useWebWorker: true,
-            fileType: 'image/jpeg'
-          });
-        }
-
         const reader = new FileReader();
         reader.onloadend = () => {
           const img = new Image();
@@ -59,7 +49,7 @@ export const useImageHandling = () => {
           };
           img.src = reader.result as string;
         };
-        reader.readAsDataURL(processedFile);
+        reader.readAsDataURL(file);
       } catch (error) {
         console.error('이미지 변환 오류:', error);
         alert('이미지 파일을 처리하는 중 오류가 발생했습니다.');
