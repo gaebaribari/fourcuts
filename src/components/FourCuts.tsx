@@ -1,7 +1,7 @@
 
 import React, { useRef, useEffect, useCallback, forwardRef } from 'react';
 import { useImageHandling } from '../hooks/useImageHandling';
-import * as S from '../styles/styledComponents';
+import * as Style from '../styles/styledComponents';
 
 interface PhotoGridContainerProps {
   backgroundColor?: string | ((props: any) => string);
@@ -107,14 +107,14 @@ const FourCuts = forwardRef<HTMLDivElement, PhotoGridContainerProps>(({ backgrou
   }, [isDragging, handleMouseMove, handleMouseUp]);
 
   return (
-    <S.PhotoGridContainer ref={ref} backgroundColor={backgroundColor} {...props}>
-      <S.StickerBackground sticker={sticker as string} />
+    <Style.PhotoGridContainer ref={ref} backgroundColor={backgroundColor} {...props}>
+      <Style.StickerBackground sticker={sticker as string} />
       {images.map((image:ImageData, index:number) => (
-        <S.PhotoBox key={index}>
+        <Style.PhotoBox key={index}>
           {!image.src ? (
             <>
-              <S.Placeholder>+</S.Placeholder>
-              <S.FileInput
+              <Style.Placeholder>+</Style.Placeholder>
+              <Style.FileInput
                 type="file"
                 accept="image/*"
                 onClick={() => setCurrentImageIndex(index)}
@@ -122,11 +122,11 @@ const FourCuts = forwardRef<HTMLDivElement, PhotoGridContainerProps>(({ backgrou
               />
             </>
           ) : (
-            <S.ImageWrapper ref={imageBoxRef}>
-              <S.CloseButton onClick={() => handleDelete(index)}>
+            <Style.ImageWrapper ref={imageBoxRef}>
+              <Style.CloseButton onClick={() => handleDelete(index)}>
                 X
-              </S.CloseButton>
-              <S.StyledImage
+              </Style.CloseButton>
+              <Style.StyledImage
                 src={image.src}
                 ref={(el) => {
                   imageRefs.current[index] = el;
@@ -139,11 +139,11 @@ const FourCuts = forwardRef<HTMLDivElement, PhotoGridContainerProps>(({ backgrou
                 imageWidth={image.width}
                 imageHeight={image.height}
               />
-            </S.ImageWrapper>
+            </Style.ImageWrapper>
           )}
-        </S.PhotoBox>
+        </Style.PhotoBox>
       ))}
-    </S.PhotoGridContainer>
+    </Style.PhotoGridContainer>
   );
 });
 

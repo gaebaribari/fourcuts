@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import bg1 from '../images/bg1.png';
 import bg2 from '../images/bg2.png';
 import bg3 from '../images/bg3.png';
+import backgroundImage from '../images/homepage2.jpg';
 
 export const PhotoGridContainer = styled.div<{ backgroundColor?: string | ((props: any) => string); }>`
   display: grid;
@@ -117,3 +118,100 @@ export const Placeholder = styled.div`
   font-size: 24px;
   color: #888;
 `;
+
+export const PageContainer = styled.div`
+  width: 100%;
+  min-height: 110vh;
+  background-image:  url(${backgroundImage});
+  background-size: cover;
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column
+`;
+
+export const Button = styled.button`
+  border-radius: 4px;
+  display:block;
+  width: 300px;
+height:50px;
+
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 1rem;
+  
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+`;
+
+export const CaptureButton = styled(Button)`
+  background-color: #1a3b00;
+  border: none;
+  color: #e9ecef;
+`;
+
+
+export const ButtonWrap = styled.div`
+  display: flex;
+   marginTop: 10px;
+
+
+   & >button {
+    border:none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 4px;
+   font-size: 20px;
+    font-weight: bold;
+   }
+`;
+
+export const ColorButton = styled.button<{
+  buttonColor: string;
+  isSelected?: boolean;
+}>`
+border:none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 4px;
+  background-color: ${props => props.buttonColor};
+  
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+&::after {
+    content: '✘'; // 일반 체크마크
+    display: ${props => props.isSelected ? 'block' : 'none'};
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 20px;
+    font-weight: bold;
+}
+`;
+
+export const colors = [
+  '#890000',
+  '#000b4d',
+  '#1a3b00',
+  '#401a00'
+];
+
+export const stickers = [
+  '',
+  'bg1',
+  'bg2',
+  'bg3',
+]
