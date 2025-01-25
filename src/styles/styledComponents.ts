@@ -64,15 +64,6 @@ export const ImageWrapper = styled.div`
   align-items: center;
 `;
 
-export const CloseButton = styled.button`
-  z-index: 1;
-  position: absolute;
-  border: none;
-  background: none;
-  cursor: pointer;
-  top: 4%;
-  right: 2%;
-`;
 
 export const StyledImage = styled.img<{
   positionX: number;
@@ -132,75 +123,6 @@ export const Wrapper = styled.div`
   flex-direction: column
 `;
 
-export const Button = styled.button`
-  border-radius: 4px;
-  display:block;
-  width: 300px;
-height:50px;
-
-  border-radius: 16px;
-  cursor: pointer;
-  font-size: 1rem;
-  
-  &:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-  }
-`;
-
-export const CaptureButton = styled(Button)`
-  background-color: #1a3b00;
-  border: none;
-  color: #e9ecef;
-`;
-
-
-export const ButtonWrap = styled.div`
-  display: flex;
-   marginTop: 10px;
-
-
-   & >button {
-    border:none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin: 4px;
-   font-size: 20px;
-    font-weight: bold;
-   }
-`;
-
-export const ColorButton = styled.button<{
-  buttonColor: string;
-  isSelected?: boolean;
-}>`
-border:none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin: 4px;
-  background-color: ${props => props.buttonColor};
-  
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-
-&::after {
-    content: '✘'; // 일반 체크마크
-    display: ${props => props.isSelected ? 'block' : 'none'};
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 20px;
-    font-weight: bold;
-}
-`;
 
 export const colors = [
   '#890000',
@@ -215,3 +137,53 @@ export const stickers = [
   'bg2',
   'bg3',
 ]
+
+
+export const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`;
+
+export const ModalContent = styled.div`
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 425px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+`;
+
+export const Title = styled.h2`
+  margin: 0 0 20px 0;
+  font-size: 1.5rem;
+  color: #333;
+`;
+
+export const TextArea = styled.textarea`
+  width: 94%;
+  min-height: 100px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  font-size: 1rem;
+  resize: vertical;
+
+  &:focus {
+    outline: none;
+    border-color: #1a3b00;
+  }
+`;
+export const ErrorMessage = styled.div`
+  color: #dc3545;
+  margin-bottom: 16px;
+  font-size: 0.875rem;
+`;

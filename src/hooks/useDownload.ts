@@ -3,7 +3,6 @@ import saveAs from 'file-saver';
 
 export const UseCapture = async (element: HTMLDivElement | null) => {
   if (!element) return;
-  
   try {
     const canvas = await html2canvas(element, { scale: 2 });
     canvas.toBlob((blob) => {
