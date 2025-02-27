@@ -1,5 +1,4 @@
 import html2canvas from 'html2canvas';
-import saveAs from 'file-saver';
 
 export const UseCapture = async (element: HTMLDivElement | null) => {
   if (!element) return;
@@ -7,7 +6,13 @@ export const UseCapture = async (element: HTMLDivElement | null) => {
     const canvas = await html2canvas(element, { scale: 2 });
     canvas.toBlob((blob) => {
       if (blob !== null) {
-        saveAs(blob, "result.png");
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = 'result.png'; 
+        link.setAttribute("target", "_blank");
+
+        link.click();
+        URL.revokeObjectURL(link.href);
       }
     });
   } catch (error) {
