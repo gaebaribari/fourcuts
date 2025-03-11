@@ -1,6 +1,6 @@
 
 import React, { useRef, forwardRef, useState } from 'react';
-import { useImageHandling } from '../hooks/useImageHandling';
+import { useHandleImage } from '../hooks/useHandleImage';
 import * as Style from '../styles/styledComponents';
 import * as Button from '../styles/button';
 
@@ -28,7 +28,7 @@ const FourCuts = forwardRef<HTMLDivElement, PhotoGridContainerProps>(({ backgrou
     imageUpload,
     imageRemove,
     startImageMove,
-  } = useImageHandling({ currentImageIndex, imageRefs, imageBoxRef });
+  } = useHandleImage({ currentImageIndex, imageRefs, imageBoxRef });
 
 
   return (
@@ -55,7 +55,6 @@ const FourCuts = forwardRef<HTMLDivElement, PhotoGridContainerProps>(({ backgrou
                 src={image.src}
                 ref={(el) => {
                   imageRefs.current[index] = el;
-                  console.log('imageRefs', imageRefs)
                 }}
                 alt=""
                 onMouseDown={startImageMove}

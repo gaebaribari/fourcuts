@@ -2,7 +2,7 @@ import './App.css';
 import { useRef, useState, useEffect } from 'react';
 import FourCuts from './components/FourCuts';
 import FeedbackButton from './components/FeedbackButton';
-import { UseCapture } from './hooks/useDownload';
+import { downloadImage } from './functions/downloadImage';
 import * as Style from './styles/styledComponents';
 import * as Button from './styles/button';
 
@@ -15,8 +15,8 @@ function App() {
     setSelectedColor(color);
   };
 
-  const handleCapture = () => {
-    UseCapture(FourCutsRef.current);
+  const handleDownload = () => {
+    downloadImage(FourCutsRef.current);
   };
 
   return (
@@ -48,8 +48,8 @@ function App() {
           sticker={selectedSticker} 
         />
         <div style={{ marginTop: '16px' }}>
-          <Button.CaptureButton onClick={handleCapture}>
-            사진 저장 📷
+          <Button.CaptureButton onClick={handleDownload}>
+            사진 저짱 📷
           </Button.CaptureButton>
           <FeedbackButton />
         </div>
