@@ -1,12 +1,12 @@
 
-import React, { useRef, forwardRef, useState } from 'react';
+import { useState } from 'react';
 import { useHandleImage } from '../hooks/useHandleImage';
 import * as Style from '../styles/styledComponents';
 import * as Button from '../styles/button';
 
-interface PhotoGridContainerProps {
-  backgroundColor?: string | ((props: any) => string);
-  sticker?: string | ((props: any) => string);
+interface FourCutsProps {
+  backgroundColor: string | ((props: any) => string);
+  sticker: string | ((props: any) => string);
 }
 
 interface ImageData {
@@ -15,24 +15,22 @@ interface ImageData {
     x: number;
     y: number;
   };
-  width?: number;
   height?: number;
+  width?: number;
 }
 
-const FourCuts = forwardRef<HTMLDivElement, PhotoGridContainerProps>(({ backgroundColor, sticker, ...props }, ref) => {
-  const [currentImageIndex, setCurrentImageIndex] = useState<number | null>(null);
-  const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
-  const imageBoxRef = useRef<HTMLImageElement>(null);
+const FourCuts = (({ backgroundColor, sticker }: FourCutsProps) => {
+  const [ boxSize ] = useState<number>(170);
+  const [ currentImageIndex, setCurrentImageIndex ] = useState<number>(0);
   const {
     images,
     imageUpload,
     imageRemove,
     startImageMove,
-  } = useHandleImage({ currentImageIndex, imageRefs, imageBoxRef });
-
+  } = useHandleImage({ currentImageIndex, boxSize });
 
   return (
-    <Style.PhotoGridContainer ref={ref} backgroundColor={backgroundColor} {...props}>
+    <Style.PhotoGridContainer backgroundColor={backgroundColor}>
       <Style.StickerBackground sticker={sticker as string} />
       {images.map((image: ImageData, index: number) => (
         <Style.PhotoBox key={index}>
@@ -47,18 +45,16 @@ const FourCuts = forwardRef<HTMLDivElement, PhotoGridContainerProps>(({ backgrou
               />
             </>
           ) : (
-            <Style.ImageWrapper ref={imageBoxRef}>
+            <Style.ImageWrapper>
               <Button.CloseButton onClick={() => imageRemove(index)}>
                 X
               </Button.CloseButton>
               <Style.StyledImage
                 src={image.src}
-                ref={(el) => {
-                  imageRefs.current[index] = el;
+                onMouseDown={(e) => {
+                  setCurrentImageIndex(index);
+                  startImageMove(e, index);
                 }}
-                alt=""
-                onMouseDown={startImageMove}
-                data-index={index}
                 positionX={image.position.x}
                 positionY={image.position.y}
                 imageWidth={image.width}
