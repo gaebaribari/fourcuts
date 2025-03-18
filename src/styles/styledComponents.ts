@@ -1,189 +1,181 @@
+import styled from "styled-components";
+import bg1 from "../images/bg1.png";
+import bg2 from "../images/bg2.png";
+import bg3 from "../images/bg3.png";
+import backgroundImage from "../images/homepage2.jpg";
 
-import styled from 'styled-components';
-import bg1 from '../images/bg1.png';
-import bg2 from '../images/bg2.png';
-import bg3 from '../images/bg3.png';
-import backgroundImage from '../images/homepage2.jpg';
-
-export const PhotoGridContainer = styled.div<{ backgroundColor?: string | ((props: any) => string); }>`
-  display: grid;
-  position: relative;  
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 10px;
-  width: 350px;
-  height: 350px;
-  margin-top: 10px;
-  padding: 80px;
-  background-color: ${props => props.backgroundColor};
+export const PhotoGridContainer = styled.div<{
+	backgroundColor?: string | ((props: any) => string);
+}>`
+	display: grid;
+	position: relative;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	gap: 10px;
+	width: 350px;
+	height: 350px;
+	margin-top: 10px;
+	padding: 80px;
+	background-color: ${(props) => props.backgroundColor};
 `;
 
-export const StickerBackground = styled.div<{ sticker?: string }>` 
-  background-image: url(${props => {
-    switch (props.sticker) {
-      case 'bg1': return bg1;
-      case 'bg2': return bg2;
-      case 'bg3': return bg3;
-      default: return '';
-    }
-  }});
-  background-size: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: ${props => props.sticker ? 1 : 0};
-  width: 510px;
-  height: 510px;
+export const StickerBackground = styled.div<{ sticker?: string }>`
+	background-image: url(${(props) => {
+		switch (props.sticker) {
+			case "bg1":
+				return bg1;
+			case "bg2":
+				return bg2;
+			case "bg3":
+				return bg3;
+			default:
+				return "";
+		}
+	}});
+	background-size: cover;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: ${(props) => (props.sticker ? 1 : 0)};
+	width: 510px;
+	height: 510px;
 `;
 
 export const PhotoBox = styled.div<{ image?: string }>`
-  background-color: ${props => props.image ? 'transparent' : '#f0f0f0'};
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  overflow: hidden;
-  cursor: ${props => props.image ? 'move' : 'pointer'};
+	background-color: ${(props) => (props.image ? "transparent" : "#f0f0f0")};
+	background-size: cover;
+	background-position: center;
+	position: relative;
+	overflow: hidden;
+	cursor: ${(props) => (props.image ? "move" : "pointer")};
 `;
 
 export const FileInput = styled.input`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	cursor: pointer;
 `;
 
 export const ImageWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 `;
 
-
 export const StyledImage = styled.img<{
-  positionX: number;
-  positionY: number;
-  imageWidth?: number;
-  imageHeight?: number;
+	positionX: number;
+	positionY: number;
+	imageWidth?: number;
+	imageHeight?: number;
 }>`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(
-    calc(-50% + ${props => props.positionX}px), 
-    calc(-50% + ${props => props.positionY}px)
-  );
-  ${props => {
-    const width = props.imageWidth || 0;
-    const height = props.imageHeight || 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(
+		calc(-50% + ${(props) => props.positionX}px),
+		calc(-50% + ${(props) => props.positionY}px)
+	);
+	${(props) => {
+		const width = props.imageWidth || 0;
+		const height = props.imageHeight || 0;
 
-    if (width < height) {
-      return `
+		if (width < height) {
+			return `
         width: 100%;
         height: auto;
         max-width: 100%;
       `;
-    } else {
-      return `
+		} else {
+			return `
         width: auto;
         height: 100%;
         max-height: 100%;
       `;
-    }
-  }}
-  cursor: move;
-  object-fit: cover;
+		}
+	}}
+	cursor: move;
+	object-fit: cover;
 `;
 
 export const Placeholder = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  font-size: 24px;
-  color: #888;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	font-size: 24px;
+	color: #888;
 `;
 
 export const PageContainer = styled.div`
-  width: 100%;
-  min-height: 110vh;
-  background-image:  url(${backgroundImage});
-  background-size: cover;
+	width: 100%;
+	min-height: 110vh;
+	background-image: url(${backgroundImage});
+	background-size: cover;
 `;
 
 export const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column
+	display: flex;
+	align-items: center;
+	flex-direction: column;
 `;
 
+export const colors = ["#890000", "#000b4d", "#1a3b00", "#401a00"];
 
-export const colors = [
-  '#890000',
-  '#000b4d',
-  '#1a3b00',
-  '#401a00'
-];
-
-export const stickers = [
-  '',
-  'bg1',
-  'bg2',
-  'bg3',
-]
-
+export const stickers = ["", "bg1", "bg2", "bg3"];
 
 export const ModalOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
 `;
 
 export const ModalContent = styled.div`
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 425px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	background: white;
+	padding: 20px;
+	border-radius: 8px;
+	width: 90%;
+	max-width: 425px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 `;
 
 export const Title = styled.h2`
-  margin: 0 0 20px 0;
-  font-size: 1.5rem;
-  color: #333;
+	margin: 0 0 20px 0;
+	font-size: 1.5rem;
+	color: #333;
 `;
 
 export const TextArea = styled.textarea`
-  width: 94%;
-  min-height: 100px;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  margin-bottom: 16px;
-  font-size: 1rem;
-  resize: vertical;
+	width: 94%;
+	min-height: 100px;
+	padding: 12px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	margin-bottom: 16px;
+	font-size: 1rem;
+	resize: vertical;
 
-  &:focus {
-    outline: none;
-    border-color: #1a3b00;
-  }
+	&:focus {
+		outline: none;
+		border-color: #1a3b00;
+	}
 `;
 export const ErrorMessage = styled.div`
-  color: #dc3545;
-  margin-bottom: 16px;
-  font-size: 0.875rem;
+	color: #dc3545;
+	margin-bottom: 16px;
+	font-size: 0.875rem;
 `;
