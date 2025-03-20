@@ -1,11 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useHandleImage } from "../hooks/useHandleImage";
 import * as Style from "../styles/styledComponents";
 import * as Button from "../styles/button";
 
 interface FourCutsProps {
-	backgroundColor: string | ((props: any) => string);
-	sticker: string | ((props: any) => string);
+	backgroundColor: string;
+	sticker: string;
 }
 
 interface ImageData {

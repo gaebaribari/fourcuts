@@ -5,7 +5,7 @@ import bg3 from "../images/bg3.png";
 import backgroundImage from "../images/homepage2.jpg";
 
 export const PhotoGridContainer = styled.div<{
-	backgroundColor?: string | ((props: any) => string);
+	backgroundColor?: string;
 }>`
 	display: grid;
 	position: relative;

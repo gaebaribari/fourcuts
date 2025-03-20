@@ -1,5 +1,5 @@
 import "./App.css";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import FourCuts from "./components/FourCuts";
 import FeedbackButton from "./components/FeedbackButton";
 import { downloadImage } from "./functions/downloadImage";
