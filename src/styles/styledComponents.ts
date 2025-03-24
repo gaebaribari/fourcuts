@@ -17,6 +17,12 @@ export const PhotoGridContainer = styled.div<{
 	margin-top: 10px;
 	padding: 80px;
 	background-color: ${(props) => props.backgroundColor};
+
+	@media screen and (max-width: 768px) {
+		width: 210px;
+		height: 210px;
+		padding: 60px;
+	}
 `;
 
 export const StickerBackground = styled.div<{ sticker?: string }>`
@@ -39,6 +45,11 @@ export const StickerBackground = styled.div<{ sticker?: string }>`
 	z-index: ${(props) => (props.sticker ? 1 : 0)};
 	width: 510px;
 	height: 510px;
+
+	@media screen and (max-width: 768px) {
+		width: 330px;
+		height: 330px;
+	}
 `;
 
 export const PhotoBox = styled.div<{ image?: string }>`

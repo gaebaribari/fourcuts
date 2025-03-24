@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import { db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
-import * as Style from "../styles/styledComponents";
-import * as Button from "../styles/button";
+import {
+	ModalOverlay,
+	ModalContent,
+	Title,
+	ErrorMessage,
+	TextArea,
+} from "../styles/styledComponents";
+import { FeedbackButton, SubmitButton } from "../styles/button";
 
 interface Props {
 	apiEndpoint?: string;
@@ -67,32 +73,32 @@ const Feedback: React.FC<Props> = ({ apiEndpoint = "/api/feedback" }) => {
 
 	return (
 		<>
-			<Button.FeedbackButton onClick={() => setIsOpen(true)}>
+			<FeedbackButton onClick={() => setIsOpen(true)}>
 				피드백 보내기 💌
-			</Button.FeedbackButton>
+			</FeedbackButton>
 
 			{isOpen && (
-				<Style.ModalOverlay onClick={() => setIsOpen(false)}>
-					<Style.ModalContent onClick={(e) => e.stopPropagation()}>
-						<Style.Title>피드백 대환영 🤍</Style.Title>
+				<ModalOverlay onClick={() => setIsOpen(false)}>
+					<ModalContent onClick={(e) => e.stopPropagation()}>
+						<Title>피드백 대환영 🤍</Title>
 						<form onSubmit={handleSubmit}>
-							{error && <Style.ErrorMessage>{error}</Style.ErrorMessage>}
-							<Style.TextArea
+							{error && <ErrorMessage>{error}</ErrorMessage>}
+							<TextArea
 								value={message}
 								onChange={(e) => setMessage(e.target.value)}
 								placeholder="서비스 개선을 위한 소중한 의견을 남겨주세요"
 								disabled={isSubmitting}
 							/>
-							<Button.SubmitButton
+							<SubmitButton
 								type="submit"
 								disabled={isSubmitting}
 								onClick={submitFeedback}
 							>
 								{isSubmitting ? "제출 중..." : "피드백 제출"}
-							</Button.SubmitButton>
+							</SubmitButton>
 						</form>
-					</Style.ModalContent>
-				</Style.ModalOverlay>
+					</ModalContent>
+				</ModalOverlay>
 			)}
 		</>
 	);

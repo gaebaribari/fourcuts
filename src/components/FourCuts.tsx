@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { useHandleImage } from "../hooks/useHandleImage";
-import * as Style from "../styles/styledComponents";
-import * as Button from "../styles/button";
+import {
+	PhotoGridContainer,
+	StickerBackground,
+	PhotoBox,
+	Placeholder,
+	FileInput,
+	ImageWrapper,
+	StyledImage,
+} from "../styles/styledComponents";
+import { CloseButton } from "../styles/button";
 
 interface FourCutsProps {
 	backgroundColor: string;
@@ -27,14 +35,14 @@ const FourCuts = ({ backgroundColor, sticker }: FourCutsProps) => {
 	});
 
 	return (
-		<Style.PhotoGridContainer backgroundColor={backgroundColor}>
-			<Style.StickerBackground sticker={sticker as string} />
+		<PhotoGridContainer backgroundColor={backgroundColor}>
+			<StickerBackground sticker={sticker as string} />
 			{images.map((image: ImageData, index: number) => (
-				<Style.PhotoBox key={index}>
+				<PhotoBox key={index}>
 					{!image.src ? (
 						<>
-							<Style.Placeholder>+</Style.Placeholder>
-							<Style.FileInput
+							<Placeholder>+</Placeholder>
+							<FileInput
 								type="file"
 								accept="image/*"
 								onClick={() => setCurrentImageIndex(index)}
@@ -42,11 +50,9 @@ const FourCuts = ({ backgroundColor, sticker }: FourCutsProps) => {
 							/>
 						</>
 					) : (
-						<Style.ImageWrapper>
-							<Button.CloseButton onClick={() => imageRemove(index)}>
-								X
-							</Button.CloseButton>
-							<Style.StyledImage
+						<ImageWrapper>
+							<CloseButton onClick={() => imageRemove(index)}>X</CloseButton>
+							<StyledImage
 								src={image.src}
 								onMouseDown={(e) => {
 									setCurrentImageIndex(index);
@@ -57,11 +63,11 @@ const FourCuts = ({ backgroundColor, sticker }: FourCutsProps) => {
 								imageWidth={image.width}
 								imageHeight={image.height}
 							/>
-						</Style.ImageWrapper>
+						</ImageWrapper>
 					)}
-				</Style.PhotoBox>
+				</PhotoBox>
 			))}
-		</Style.PhotoGridContainer>
+		</PhotoGridContainer>
 	);
 };
 
