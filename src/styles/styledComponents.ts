@@ -5,7 +5,7 @@ import bg3 from "../images/bg3.png";
 import backgroundImage from "../images/homepage2.jpg";
 
 export const PhotoGridContainer = styled.div<{
-	backgroundColor?: string | ((props: any) => string);
+	backgroundColor?: string;
 }>`
 	display: grid;
 	position: relative;
@@ -91,13 +91,13 @@ export const StyledImage = styled.img<{
         width: 100%;
         height: auto;
         max-width: 100%;
-      `;
+	`;
 		} else {
 			return `
         width: auto;
         height: 100%;
         max-height: 100%;
-      `;
+    `;
 		}
 	}}
 	cursor: move;

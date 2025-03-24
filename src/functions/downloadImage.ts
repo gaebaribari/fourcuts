@@ -4,7 +4,7 @@ export const downloadImage = async (element: HTMLDivElement | null) => {
 	if (!element) return;
 	try {
 		const canvas = await html2canvas(element, { scale: 2 });
-		let dataURL = canvas.toDataURL();
+		const dataURL = canvas.toDataURL();
 
 		const link = document.createElement("a");
 		link.setAttribute("href", dataURL);

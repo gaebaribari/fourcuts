@@ -54,7 +54,7 @@ function App() {
 				</div>
 				<div style={{ marginTop: "16px" }}>
 					<Button.CaptureButton onClick={handleDownload}>
-						사진 저짱w 📷
+						사진 저장 📷
 					</Button.CaptureButton>
 					<FeedbackButton />
 				</div>
