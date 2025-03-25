@@ -14,7 +14,6 @@ export const PhotoGridContainer = styled.div<{
 	gap: 10px;
 	width: 350px;
 	height: 350px;
-	margin-top: 10px;
 	padding: 80px;
 	background-color: ${(props) => props.backgroundColor};
 

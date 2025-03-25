@@ -58,7 +58,7 @@ export const CaptureButton = styled(Button)`
 
 export const ButtonWrap = styled.div`
 	display: flex;
-	margintop: 10px;
+	margin: 5px 0 16px 0;
 
 	& > button {
 		border: none;
@@ -99,5 +99,9 @@ export const ColorButton = styled.button<{
 		color: rgba(255, 255, 255, 0.9);
 		font-size: 20px;
 		font-weight: bold;
+
+		-webkit-text-fill-color: black;
+		-webkit-tap-highlight-color: transparent;
+		-webkit-focus-ring-color: transparent;
 	}
 `;
