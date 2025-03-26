@@ -8,7 +8,7 @@ import {
 	FileInput,
 	ImageWrapper,
 	StyledImage,
-} from "../styles/styledComponents";
+} from "../styles/fourcuts";
 import { CloseButton } from "../styles/button";
 
 interface FourCutsProps {

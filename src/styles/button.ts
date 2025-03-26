@@ -16,27 +16,6 @@ export const Button = styled.button`
 	}
 `;
 
-export const SubmitButton = styled(Button)`
-	background-color: #1a3b00;
-	color: white;
-	width: 100%;
-	padding: 12px;
-
-	&:hover:not(:disabled) {
-		background-color: #1a3b00;
-	}
-`;
-
-export const FeedbackButton = styled(Button)`
-	border: 2px solid #1a3b00;
-	margin-top: 10px;
-	color: #1a3b00;
-
-	&:hover {
-		background-color: #e9ecef;
-	}
-`;
-
 export const CloseButton = styled.button`
 	z-index: 1;
 	position: absolute;
@@ -56,52 +35,23 @@ export const CaptureButton = styled(Button)`
 	color: #e9ecef;
 `;
 
-export const ButtonWrap = styled.div`
-	display: flex;
-	margin: 5px 0 16px 0;
-
-	& > button {
-		border: none;
-		width: 40px;
-		height: 40px;
-		border-radius: 50%;
-		margin: 4px;
-		font-size: 20px;
-		font-weight: bold;
-	}
-`;
-
-export const ColorButton = styled.button<{
-	buttonColor: string;
-	isSelected?: boolean;
+export const SelectButton = styled.button<{
+	buttonColor?: string;
 }>`
 	border: none;
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;
 	margin: 4px;
-	background-color: ${(props) => props.buttonColor};
-
-	cursor: pointer;
-	transition: transform 0.2s ease;
-	position: relative;
+	font-size: 20px;
+	font-weight: bold;
+	color: white;
+	background-color: ${(props) => props.buttonColor || "black"};
 	display: flex;
 	align-items: center;
 	justify-content: center;
+`;
 
-	&:hover {
-		transform: scale(1.1);
-	}
-
-	&::after {
-		content: "✘"; // 일반 체크마크
-		display: ${(props) => (props.isSelected ? "block" : "none")};
-		color: rgba(255, 255, 255, 0.9);
-		font-size: 20px;
-		font-weight: bold;
-
-		-webkit-text-fill-color: black;
-		-webkit-tap-highlight-color: transparent;
-		-webkit-focus-ring-color: transparent;
-	}
+export const SelectButtonWrap = styled.div`
+	display: flex;
 `;

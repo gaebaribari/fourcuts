@@ -1,14 +1,9 @@
 import { useRef, useState } from "react";
+import Feedback from "./components/Feedback";
 import FourCuts from "./components/FourCuts";
-import FeedbackButton from "./components/FeedbackButton";
 import { downloadImage } from "./functions/downloadImage";
-import {
-	PageContainer,
-	Wrapper,
-	stickers,
-	colors,
-} from "./styles/styledComponents";
-import { ColorButton, ButtonWrap, CaptureButton } from "./styles/button";
+import { PageContainer, Wrapper, stickers, colors } from "./styles/fourcuts";
+import { SelectButton, SelectButtonWrap, CaptureButton } from "./styles/button";
 
 function App() {
 	const fourCutsRef = useRef<HTMLDivElement | null>(null);
@@ -26,37 +21,33 @@ function App() {
 	return (
 		<PageContainer>
 			<Wrapper>
-				<div style={{ display: "flex", marginTop: "16px" }}>
+				<SelectButtonWrap>
 					{colors.map((color: string) => (
-						<ColorButton
+						<SelectButton
 							key={color}
 							buttonColor={color}
 							onClick={() => handleColorSelect(color)}
-							isSelected={color === selectedColor}
-						/>
+						>
+							{selectedColor === color ? "✘" : ""}
+						</SelectButton>
 					))}
-				</div>
-				<ButtonWrap>
+				</SelectButtonWrap>
+				<SelectButtonWrap>
 					{stickers.map((sticker: string, index: number) => (
-						<button key={sticker} onClick={() => setSelectedSticker(sticker)}>
-							{selectedSticker === sticker
-								? "✘"
-								: index === 0
-								? "0"
-								: index === 1
-								? "1"
-								: index === 2
-								? "2"
-								: "3"}
-						</button>
+						<SelectButton
+							key={sticker}
+							onClick={() => setSelectedSticker(sticker)}
+						>
+							{selectedSticker === sticker ? "✘" : index}
+						</SelectButton>
 					))}
-				</ButtonWrap>
+				</SelectButtonWrap>
 				<div ref={fourCutsRef}>
 					<FourCuts backgroundColor={selectedColor} sticker={selectedSticker} />
 				</div>
 				<div style={{ marginTop: "16px" }}>
 					<CaptureButton onClick={handleDownload}>사진 저장 📷</CaptureButton>
-					<FeedbackButton />
+					<Feedback />
 				</div>
 			</Wrapper>
 		</PageContainer>
