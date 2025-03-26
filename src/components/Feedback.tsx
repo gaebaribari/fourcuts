@@ -7,13 +7,15 @@ import {
 	Title,
 	ErrorMessage,
 	TextArea,
-	FeedbackButton,
 	SubmitButton,
 } from "../styles/feedback";
 
-const Feedback = () => {
+interface Props {
+	onClose: () => void;
+}
+
+const Feedback = ({ onClose }: Props) => {
 	const [message, setMessage] = useState("");
-	const [isOpen, setIsOpen] = useState(false);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 
@@ -39,43 +41,35 @@ const Feedback = () => {
 				timestamp: date + " " + time,
 			});
 			setIsSubmitting(false);
-			setIsOpen(false);
 			setMessage("");
+			onClose();
 		} catch (firebaseError) {
 			console.error("Firebase logging error:", firebaseError);
 		}
 	};
 
 	return (
-		<>
-			<FeedbackButton onClick={() => setIsOpen(true)}>
-				피드백 보내기 💌
-			</FeedbackButton>
-
-			{isOpen && (
-				<ModalBackground onClick={() => setIsOpen(false)}>
-					<ModalContent onClick={(e) => e.stopPropagation()}>
-						<Title>피드백 대환영 🤍</Title>
-						<form onSubmit={handleSubmit}>
-							{error && <ErrorMessage>{error}</ErrorMessage>}
-							<TextArea
-								value={message}
-								onChange={(e) => setMessage(e.target.value)}
-								placeholder="서비스 개선을 위한 소중한 의견을 남겨주세요"
-								disabled={isSubmitting}
-							/>
-							<SubmitButton
-								type="submit"
-								disabled={isSubmitting}
-								onClick={submitFeedback}
-							>
-								{isSubmitting ? "제출 중..." : "피드백 제출"}
-							</SubmitButton>
-						</form>
-					</ModalContent>
-				</ModalBackground>
-			)}
-		</>
+		<ModalBackground onClick={onClose}>
+			<ModalContent onClick={(e) => e.stopPropagation()}>
+				<Title>피드백 대환영 🤍</Title>
+				<form onSubmit={handleSubmit}>
+					{error && <ErrorMessage>{error}</ErrorMessage>}
+					<TextArea
+						value={message}
+						onChange={(e) => setMessage(e.target.value)}
+						placeholder="서비스 개선을 위한 소중한 의견을 남겨주세요"
+						disabled={isSubmitting}
+					/>
+					<SubmitButton
+						type="submit"
+						disabled={isSubmitting}
+						onClick={submitFeedback}
+					>
+						{isSubmitting ? "제출 중..." : "피드백 제출"}
+					</SubmitButton>
+				</form>
+			</ModalContent>
+		</ModalBackground>
 	);
 };
 
