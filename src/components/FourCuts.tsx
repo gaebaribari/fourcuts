@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHandleImage } from "../hooks/useHandleImage";
 import {
 	PhotoGridContainer,
@@ -27,12 +27,26 @@ interface ImageData {
 }
 
 const FourCuts = ({ backgroundColor, sticker }: FourCutsProps) => {
-	const [boxSize] = useState<number>(170);
+	const [boxSize, setBoxSize] = useState<number>();
 	const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 	const { images, imageUpload, imageRemove, startImageMove } = useHandleImage({
 		currentImageIndex,
 		boxSize,
 	});
+
+	const handleBoxSize = () => {
+		if (window.matchMedia("(max-width: 768px)").matches) {
+			setBoxSize(100);
+		} else {
+			setBoxSize(170);
+		}
+	};
+
+	useEffect(() => {
+		handleBoxSize();
+	}, []);
+
+	window.addEventListener("resize", handleBoxSize);
 
 	return (
 		<PhotoGridContainer backgroundColor={backgroundColor}>

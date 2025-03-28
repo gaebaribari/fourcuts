@@ -12,7 +12,7 @@ interface ImageData {
 
 interface Props {
 	currentImageIndex: number;
-	boxSize: number;
+	boxSize: number | undefined;
 }
 export const useHandleImage = ({ currentImageIndex, boxSize }: Props) => {
 	const [images, setImages] = useState<ImageData[]>(
@@ -35,6 +35,7 @@ export const useHandleImage = ({ currentImageIndex, boxSize }: Props) => {
 						let imageHeight: number;
 						let imageWidth: number;
 
+						if (!boxSize) return;
 						if (img.width >= img.height) {
 							imageHeight = boxSize;
 							imageWidth = (img.width * boxSize) / img.height;
@@ -103,6 +104,7 @@ export const useHandleImage = ({ currentImageIndex, boxSize }: Props) => {
 			const currentImage = images[currentImageIndex];
 			const { height, width } = currentImage;
 
+			if (!boxSize) return;
 			if (width < height) {
 				const minY = (-1 * (height - boxSize)) / 2;
 				const maxY = (height - boxSize) / 2;
