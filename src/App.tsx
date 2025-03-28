@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import Feedback from "./components/Feedback";
+import FeedbackModal from "./components/FeedbackModal";
 import FourCuts from "./components/FourCuts";
 import { downloadImage } from "./functions/downloadImage";
 import { PageContainer, Wrapper, stickers, colors } from "./styles/fourcuts";
@@ -57,7 +57,7 @@ function App() {
 					<FeedbackButton onClick={() => setIsFeedbackModalOpen(true)}>
 						피드백 보내기 💌
 					</FeedbackButton>
-					{isFeedbackModalOpen && <Feedback onClose={handleClose} />}
+					{isFeedbackModalOpen && <FeedbackModal onClose={handleClose} />}
 				</div>
 			</Wrapper>
 		</PageContainer>

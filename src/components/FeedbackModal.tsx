@@ -14,7 +14,7 @@ interface Props {
 	onClose: () => void;
 }
 
-const Feedback = ({ onClose }: Props) => {
+const FeedbackModal = ({ onClose }: Props) => {
 	const [message, setMessage] = useState("");
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [error, setError] = useState<string | null>(null);
