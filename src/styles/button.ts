@@ -24,6 +24,8 @@ export const CloseButton = styled.button`
 	cursor: pointer;
 	top: 4%;
 	right: 2%;
+	opacity: 0;
+	transition: opacity 0.2s ease-in-out;
 
 	-webkit-text-fill-color: black;
 	-webkit-tap-highlight-color: transparent;

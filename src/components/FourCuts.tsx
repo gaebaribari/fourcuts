@@ -72,10 +72,10 @@ const FourCuts = ({ backgroundColor, sticker }: FourCutsProps) => {
 									setCurrentImageIndex(index);
 									startImageMove(e, index);
 								}}
-								positionX={image.position.x}
-								positionY={image.position.y}
-								imageWidth={image.width}
-								imageHeight={image.height}
+								$positionX={image.position.x}
+								$positionY={image.position.y}
+								$imageWidth={image.width}
+								$imageHeight={image.height}
 							/>
 						</ImageWrapper>
 					)}

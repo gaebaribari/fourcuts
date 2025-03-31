@@ -3,6 +3,7 @@ import bg1 from "../images/bg1.png";
 import bg2 from "../images/bg2.png";
 import bg3 from "../images/bg3.png";
 import backgroundImage from "../images/homepage2.jpg";
+import { CloseButton } from "./button";
 
 export const PhotoGridContainer = styled.div<{
 	backgroundColor?: string;
@@ -77,24 +78,28 @@ export const ImageWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	&:hover ${CloseButton} {
+		opacity: 1;
+	}
 `;
 
 export const StyledImage = styled.img<{
-	positionX: number;
-	positionY: number;
-	imageWidth?: number;
-	imageHeight?: number;
+	$positionX: number;
+	$positionY: number;
+	$imageWidth?: number;
+	$imageHeight?: number;
 }>`
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(
-		calc(-50% + ${(props) => props.positionX}px),
-		calc(-50% + ${(props) => props.positionY}px)
+		calc(-50% + ${(props) => props.$positionX}px),
+		calc(-50% + ${(props) => props.$positionY}px)
 	);
 	${(props) => {
-		const width = props.imageWidth || 0;
-		const height = props.imageHeight || 0;
+		const width = props.$imageWidth || 0;
+		const height = props.$imageHeight || 0;
 
 		if (width < height) {
 			return `

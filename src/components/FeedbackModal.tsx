@@ -73,4 +73,4 @@ const FeedbackModal = ({ onClose }: Props) => {
 	);
 };
 
-export default Feedback;
+export default FeedbackModal;
