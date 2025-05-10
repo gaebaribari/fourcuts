@@ -53,7 +53,9 @@ function App() {
 					<FourCuts backgroundColor={selectedColor} sticker={selectedSticker} />
 				</div>
 				<div style={{ marginTop: "16px" }}>
-					<CaptureButton onClick={handleDownload}>사진 저장 📷</CaptureButton>
+					<CaptureButton onClick={handleDownload}>
+						사진 다운로드 📷
+					</CaptureButton>
 					<FeedbackButton onClick={() => setIsFeedbackModalOpen(true)}>
 						피드백 보내기 💌
 					</FeedbackButton>
