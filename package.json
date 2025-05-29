@@ -20,7 +20,9 @@
 		"styled-components": "^6.1.13",
 		"textarea": "^0.3.0",
 		"typescript": "^5.8.2",
-		"util": "^0.12.5"
+		"util": "^0.12.5",
+		"web-vitals": "^2.1.4",
+		"web-vitals-reporter": "^1.0.0"
 	},
 	"scripts": {
 		"start": "react-scripts start",
@@ -46,7 +48,9 @@
 	},
 	"packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
 	"devDependencies": {
-		"autoprefixer": "^10.4.20"
+		"autoprefixer": "^10.4.20",
+		"customize-cra": "^1.0.0",
+		"react-app-rewired": "^2.2.1"
 	},
 	"homepage": "https://gaebaribari.github.io/fourcuts/"
 }
