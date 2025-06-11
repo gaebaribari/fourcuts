@@ -9,11 +9,12 @@ export const downloadImage = async (element: HTMLDivElement | null) => {
 			if (blob !== null) {
 				const link = document.createElement("a");
 				link.href = URL.createObjectURL(blob);
-				console.log(link.href, "이게 Null이어서 안된거아니야?"); //왜 모바일에선 안된거냐며
-				link.download = "result.png";
-				link.setAttribute("target", "_blank");
+				// link.download = "result.png";
+				link.setAttribute("download", "result.png");
+				document.body.appendChild(link);
 
 				link.click();
+				document.body.removeChild(link);
 				URL.revokeObjectURL(link.href);
 			}
 		});

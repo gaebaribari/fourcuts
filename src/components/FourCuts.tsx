@@ -34,19 +34,22 @@ const FourCuts = ({ backgroundColor, sticker }: FourCutsProps) => {
 		boxSize,
 	});
 
-	const handleBoxSize = () => {
-		if (window.matchMedia("(max-width: 768px)").matches) {
-			setBoxSize(100);
-		} else {
-			setBoxSize(170);
-		}
-	};
-
 	useEffect(() => {
-		handleBoxSize();
-	}, []);
+		const handleBoxSize = () => {
+			if (window.matchMedia("(max-width: 768px)").matches) {
+				setBoxSize(100);
+			} else {
+				setBoxSize(170);
+			}
+		};
 
-	window.addEventListener("resize", handleBoxSize);
+		handleBoxSize(); // 초기 실행
+		window.addEventListener("resize", handleBoxSize);
+
+		return () => {
+			window.removeEventListener("resize", handleBoxSize);
+		};
+	}, []);
 
 	return (
 		<PhotoGridContainer backgroundColor={backgroundColor}>

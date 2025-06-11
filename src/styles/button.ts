@@ -34,6 +34,8 @@ export const CloseButton = styled.button`
 
 export const CaptureButton = styled(Button)`
 	background-color: #1a3b00;
+	text-align: center;
+	align-content: center;
 	color: #e9ecef;
 `;
 
