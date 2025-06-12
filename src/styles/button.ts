@@ -54,8 +54,23 @@ export const SelectButton = styled.button<{
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	&:hover {
+		cursor: pointer;
+	}
 `;
 
 export const SelectButtonWrap = styled.div`
 	display: flex;
+	margin-bottom: 1%;
+	&:first-child {
+		margin-top: 1%;
+		margin-bottom: 0;
+	}
+
+	@media screen and (max-width: 768px) {
+		&:first-child {
+			margin-top: 6%;
+			margin-bottom: 0;
+		}
+	}
 `;

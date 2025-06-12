@@ -134,6 +134,10 @@ export const PageContainer = styled.div`
 	min-height: 110vh;
 	background-image: url(${backgroundImage});
 	background-size: cover;
+
+	@media screen and (max-width: 768px) {
+		min-height: 100vh;
+	}
 `;
 
 export const Wrapper = styled.div`
