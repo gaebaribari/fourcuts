@@ -1,5 +1,4 @@
 import html2canvas from "html2canvas";
-// import saveAs from "file-saver";
 
 export const downloadImage = async (element: HTMLDivElement | null) => {
 	if (!element) return;
@@ -9,7 +8,6 @@ export const downloadImage = async (element: HTMLDivElement | null) => {
 			if (blob !== null) {
 				const link = document.createElement("a");
 				link.href = URL.createObjectURL(blob);
-				// link.download = "result.png";
 				link.setAttribute("download", "result.png");
 				document.body.appendChild(link);
 
