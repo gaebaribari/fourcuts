@@ -54,10 +54,10 @@ function App() {
 				</div>
 				<div style={{ marginTop: "16px" }}>
 					<CaptureButton as={"a"} onClick={handleDownload}>
-						사진 다운하기 📸
+						사진 다운하기
 					</CaptureButton>
 					<FeedbackButton onClick={() => setIsFeedbackModalOpen(true)}>
-						피드백 보내기 💌
+						피드백 보내기
 					</FeedbackButton>
 					{isFeedbackModalOpen && <FeedbackModal onClose={handleClose} />}
 				</div>
